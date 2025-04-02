@@ -1,5 +1,5 @@
 
-Download the checkpoint from https://drive.google.com/drive/folders/1R48RTvrjMcEY3b00T6QYum4dL3o_GIQz?usp=sharing
+Download checkpoints `sh download.sh`
 
 - `MedSAM2_2411.pt`: The based model trained in Nov. 2024
 - `MedSAM2_US_Heart.pt`: Fine-tuned model for heart ultrasound video segmentation
