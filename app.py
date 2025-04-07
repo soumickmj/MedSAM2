@@ -15,6 +15,8 @@ import threading
 import time
 os.environ["TORCH_CUDNN_SDPA_ENABLED"] = "1"
 import shutil
+import ffmpeg
+from moviepy import ImageSequenceClip
 import zipfile
 import torch
 import numpy as np
@@ -24,8 +26,6 @@ from sam2.build_sam import build_sam2
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 from sam2.build_sam import build_sam2_video_predictor
 import cv2
-import ffmpeg
-from moviepy.editor import ImageSequenceClip
 
 
 user_processes = {}
@@ -675,10 +675,7 @@ def seg_track_app():
         gr.Markdown(
             '''
             <div style="text-align:center; margin-bottom:20px;">
-                <span style="font-size:3em; font-weight:bold;">MedSAM2 for Video Segmentation 🔥</span>
-            </div>
-            <div style="text-align:center; margin-bottom:10px;">
-                <span style="font-size:1.5em; font-weight:bold;">MedSAM2: Segment Anything in 3D Medical Images and Videos</span>
+                <span style="font-size:3em; font-weight:bold;">MedSAM2: Segment Anything in 3D Medical Images and Videos</span>
             </div>
             <div style="text-align:center; margin-bottom:20px;">
                 <a href="https://github.com/bowang-lab/MedSAM/tree/MedSAM2">
@@ -706,9 +703,6 @@ def seg_track_app():
                     <li>7. Click <b>Reset</b> to reset the app</li>
                     <li>8. Download the video with segmentation results</li>
                 </ol>
-            </div>
-            <div style="text-align:left; line-height:1.8;">
-                We designed this API and <a href="https://github.com/bowang-lab/MedSAMSlicer/tree/SAM2" target="_blank">3D Slicer Plugin</a> for medical image and video segmentation where the checkpoints are based on the original SAM2 models (<a href="https://github.com/facebookresearch/segment-anything-2" target="_blank">https://github.com/facebookresearch/segment-anything-2</a>). The image segmentation fine-tune code has been released on <a href="https://github.com/bowang-lab/MedSAM/tree/MedSAM2?tab=readme-ov-file#fine-tune-sam2-on-the-abdomen-ct-dataset" target="_blank">GitHub</a>. The video fine-tuning code is under active development and will be released as well.  
             </div>
             <div style="text-align:left; line-height:1.8;">
                 If you find these tools useful, please consider citing the following papers:
@@ -931,7 +925,7 @@ def seg_track_app():
         )
         
     app.queue(concurrency_count=1)
-    app.launch(debug=True, enable_queue=True, share=False, server_name="0.0.0.0", server_port=8862)
+    app.launch(debug=True, enable_queue=True, share=False, server_name="0.0.0.0", server_port=18862)
     # app.launch(debug=True, enable_queue=True, share=True)
 
 if __name__ == "__main__":

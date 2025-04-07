@@ -1,7 +1,9 @@
 # MedSAM2
 Segment Anything in 3D Medical Images and Videos
 
-[[`Paper`](tbd)] [[`Project`](https://medsam2.github.io/)] [[Huggingface](https://huggingface.co/wanglab/MedSAM2)] [[`Dataset List`](https://medsam-datasetlist.github.io/)] [[`3D Slicer`](https://github.com/bowang-lab/MedSAMSlicer/tree/MedSAM2)] [[`Gradio App`](app.py)] [[`Colab`](https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing)] [[`BibTeX`](#Bibtex)]
+Welcome to join our [mailing list](https://forms.gle/bLxGb5SEpdLCUChQ7) to get updates. We’re also actively looking to collaborate on annotating new large-scale 3D datasets. If you have unlabeled medical images or videos and want to share with the community, let’s connect!
+
+[[`Paper`](tbd)] [[`Project`](https://medsam2.github.io/)] [[Huggingface](https://huggingface.co/wanglab/MedSAM2)] [[`Dataset List`](https://medsam-datasetlist.github.io/)] [[`3D Slicer`](https://github.com/bowang-lab/MedSAMSlicer/tree/MedSAM2)] [[`Gradio App`](app.py)] [[`Colab`](https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing)] [[`Supplementary`](#Bibtex)] [[`BibTeX`](#Bibtex)]
 
 
 
@@ -32,9 +34,14 @@ pip install moviepy
 
 Note: Please also cite the raw [DeepLesion](https://doi.org/10.1117/1.JMI.5.3.036501) and [LLD-MMRI](https://www.sciencedirect.com/science/article/pii/S0893608025001078) dataset paper when using these datasets. 
 
+- [RVENET](https://rvenet.github.io/dataset/): Waiting for authors' approval to release the mask.  
+
+
 ## Inference
 
 ### 3D medical image segmentation
+
+- [CoLab](https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing): [MedSAM2_inference_CT_Lesion_Demo.ipynb](notebooks/MedSAM2_inference_CT_Lesion.ipynb)
 
 - CMD
 
@@ -42,9 +49,10 @@ Note: Please also cite the raw [DeepLesion](https://doi.org/10.1117/1.JMI.5.3.03
 python medsam2_infer_3D_CT.py -i CT_DeepLesion/images -o CT_DeepLesion/segmentation
 ```
 
-- [CoLab](https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing): MedSAM2_inference_CT_Lesion_Demo.ipynb
-
 ### Medical video segmentation
+
+- [CoLab](https://colab.research.google.com/drive/1hyVyGh7qjTbFMuv568YcRoccdkNuDTaW?usp=sharing): [MedSAM2_Inference_Video_Demo.ipynb](notebooks/MedSAM2_Inference_Video.ipynb)
+
 
 - CMD
 
@@ -52,7 +60,7 @@ python medsam2_infer_3D_CT.py -i CT_DeepLesion/images -o CT_DeepLesion/segmentat
 python medsam2_infer_video.py -i input_video_path -m input_mask_path -o output_video_path 
 ```
 
-- [CoLab](https://colab.research.google.com/drive/1hyVyGh7qjTbFMuv568YcRoccdkNuDTaW?usp=sharing): MedSAM2_Inference_Video_Demo.ipynb
+
 
 
 ### Gradio demo
@@ -78,6 +86,11 @@ sbatch multi_node_train.sh
 ## Bibtex
 
 ```bash
-
+@article{MedSAM2,
+    title={MedSAM2: Segment Anything in 3D Medical Images and Videos},
+    author={Ma, Jun and Yang, Zongxin and Kim, Sumin and Chen, Bihui and Baharoon, Mohammed and Fallahpour, Adibvafa and Asakereh, Reza and Lyu, Hongwei and Wang, Bo},
+    journal={arXiv preprint arXiv:2505.TBA},
+    year={2025}
+}
 ```
 
