@@ -9,6 +9,7 @@ from glob import glob
 import hashlib
 import math
 import multiprocessing as mp
+import platform
 import os
 from os.path import basename, splitext, dirname
 import threading
@@ -644,16 +645,29 @@ def seg_track_app():
         height: auto;
     }
     """
-    config_path = "/" + os.path.abspath(os.environ.get("CONFIG_PATH", "./sam2/configs/"))
-    checkpoint_path = os.environ.get("CHECKPOINT_PATH", "./checkpoints")
 
-    config_files = glob(os.path.join(config_path, "*.yaml"))
-    config_files.sort(key=lambda x: '_t.' not in basename(x))
+    if platform.system() == "Windows":
+        config_path = os.path.abspath(os.environ.get("CONFIG_PATH", "sam2/configs/"))
+        checkpoint_path = os.environ.get("CHECKPOINT_PATH", "checkpoints/")
 
-    checkpoint_files = glob(os.path.join(checkpoint_path, "*.pt"))
-    checkpoint_files.sort(key=lambda x: 'tiny' not in basename(x))
+        config_files = glob(os.path.join(config_path, "*.yaml"))
+        config_files.sort(key=lambda x: '_t.' not in basename(x))
 
-    medsam_checkpoints = glob("./checkpoints/*.pt")
+        checkpoint_files = glob(os.path.join(checkpoint_path, "*.pt"))
+        checkpoint_files.sort(key=lambda x: 'tiny' not in basename(x))
+
+        medsam_checkpoints = glob("checkpoints/*.pt")
+    else:
+        config_path = "/" + os.path.abspath(os.environ.get("CONFIG_PATH", "./sam2/configs/"))
+        checkpoint_path = os.environ.get("CHECKPOINT_PATH", "./checkpoints")
+
+        config_files = glob(os.path.join(config_path, "*.yaml"))
+        config_files.sort(key=lambda x: '_t.' not in basename(x))
+
+        checkpoint_files = glob(os.path.join(checkpoint_path, "*.pt"))
+        checkpoint_files.sort(key=lambda x: 'tiny' not in basename(x))
+
+        medsam_checkpoints = glob("./checkpoints/*.pt")
 
     config_display = [splitext(basename(f))[0] for f in config_files]
     medsam_display = [
