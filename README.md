@@ -1,9 +1,9 @@
 # MedSAM2
 Segment Anything in 3D Medical Images and Videos
 
-Welcome to join our [mailing list](https://forms.gle/bLxGb5SEpdLCUChQ7) to get updates. We’re also actively looking to collaborate on annotating new large-scale 3D datasets. If you have unlabeled medical images or videos and want to share with the community, let’s connect!
+Welcome to join our [mailing list](https://forms.gle/bLxGb5SEpdLCUChQ7) to get updates. We’re also actively looking to collaborate on annotating new large-scale 3D datasets. If you have unlabeled medical images or videos and want to share them with the community, let’s connect!
 
-[[`Paper`](tbd)] [[`Project`](https://medsam2.github.io/)] [[Huggingface](https://huggingface.co/wanglab/MedSAM2)] [[`Dataset List`](https://medsam-datasetlist.github.io/)] [[`3D Slicer`](https://github.com/bowang-lab/MedSAMSlicer/tree/MedSAM2)] [[`Gradio App`](app.py)] [[`Colab`](https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing)] [[`Supplementary`](#Bibtex)] [[`BibTeX`](#Bibtex)]
+[[`Paper`](https://arxiv.org/abs/2504.03600)] [[`Project`](https://medsam2.github.io/)] [[Huggingface](https://huggingface.co/wanglab/MedSAM2)] [[`Dataset List`](https://medsam-datasetlist.github.io/)] [[`3D Slicer`](https://github.com/bowang-lab/MedSAMSlicer/tree/MedSAM2)] [[`Gradio App`](app.py)] [[`Colab`](https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing)] [[`BibTeX`](#Bibtex)]
 
 
 
@@ -89,7 +89,7 @@ sbatch multi_node_train.sh
 @article{MedSAM2,
     title={MedSAM2: Segment Anything in 3D Medical Images and Videos},
     author={Ma, Jun and Yang, Zongxin and Kim, Sumin and Chen, Bihui and Baharoon, Mohammed and Fallahpour, Adibvafa and Asakereh, Reza and Lyu, Hongwei and Wang, Bo},
-    journal={arXiv preprint arXiv:2505.TBA},
+    journal={arXiv preprint arXiv:2504.03600},
     year={2025}
 }
 ```
