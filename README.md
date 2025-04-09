@@ -16,7 +16,8 @@ Segment Anything in 3D Medical Images and Videos
    <tr>
      <td><a href="https://github.com/bowang-lab/MedSAMSlicer/tree/MedSAM2" target="_blank"><img src="https://img.shields.io/badge/3D_Slicer-Plugin-000000?style=for-the-badge" alt="3D Slicer"></a></td>
      <td><a href="https://github.com/bowang-lab/MedSAM2/blob/main/app.py" target="_blank"><img src="https://img.shields.io/badge/Gradio-Demo-F9D371?style=for-the-badge&logo=gradio&logoColor=white" alt="Gradio App"></a></td>
-     <td><a href="https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing" target="_blank"><img src="https://img.shields.io/badge/Colab-Notebook-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" alt="Colab"></a></td>
+     <td><a href="https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing" target="_blank"><img src="https://img.shields.io/badge/Colab-Notebook-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" alt="Colab-3D-demo"></a></td>
+     <td><a href="https://colab.research.google.com/drive/16niRHqdDZMCGV7lKuagNq_r_CEHtKY1f?usp=sharing" target="_blank"><img src="https://img.shields.io/badge/Colab-Notebook-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" alt="Colab-Video-demo"></a></td>
    </tr>
  </table>
 </div>
@@ -58,7 +59,7 @@ Note: Please also cite the raw [DeepLesion](https://doi.org/10.1117/1.JMI.5.3.03
 
 ### 3D medical image segmentation
 
-- [CoLab](https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing): [MedSAM2_inference_CT_Lesion_Demo.ipynb](notebooks/MedSAM2_inference_CT_Lesion.ipynb)
+- [Colab](https://colab.research.google.com/drive/1MKna9Sg9c78LNcrVyG58cQQmaePZq2k2?usp=sharing): [MedSAM2_inference_CT_Lesion_Demo.ipynb](notebooks/MedSAM2_inference_CT_Lesion.ipynb)
 
 - CMD
 
@@ -68,7 +69,7 @@ python medsam2_infer_3D_CT.py -i CT_DeepLesion/images -o CT_DeepLesion/segmentat
 
 ### Medical video segmentation
 
-- [CoLab](https://colab.research.google.com/drive/1hyVyGh7qjTbFMuv568YcRoccdkNuDTaW?usp=sharing): [MedSAM2_Inference_Video_Demo.ipynb](notebooks/MedSAM2_Inference_Video.ipynb)
+- [Colab](https://colab.research.google.com/drive/16niRHqdDZMCGV7lKuagNq_r_CEHtKY1f?usp=sharing): [MedSAM2_Inference_Video_Demo.ipynb](notebooks/MedSAM2_Inference_Video.ipynb)
 
 
 - CMD
