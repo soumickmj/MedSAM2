@@ -47,15 +47,31 @@ HF_MODEL_ID_TO_FILENAMES = {
 }
 
 
+def get_best_available_device():
+    """
+    Get the best available device in the order: CUDA, MPS, CPU
+    Returns: device string for torch.device
+    """
+    if torch.cuda.is_available():
+        return "cuda"
+    elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+        return "mps"
+    else:
+        return "cpu"
+
+
 def build_sam2(
     config_file,
     ckpt_path=None,
-    device="cuda",
+    device=None,
     mode="eval",
     hydra_overrides_extra=[],
     apply_postprocessing=True,
     **kwargs,
 ):
+    # Use the provided device or get the best available one
+    device = device or get_best_available_device()
+    logging.info(f"Using device: {device}")
 
     if apply_postprocessing:
         hydra_overrides_extra = hydra_overrides_extra.copy()
@@ -79,12 +95,16 @@ def build_sam2(
 def build_sam2_video_predictor(
     config_file,
     ckpt_path=None,
-    device="cuda",
+    device=None,
     mode="eval",
     hydra_overrides_extra=[],
     apply_postprocessing=True,
     **kwargs,
 ):
+    # Use the provided device or get the best available one
+    device = device or get_best_available_device()
+    logging.info(f"Using device: {device}")
+
     hydra_overrides = [
         "++model._target_=sam2.sam2_video_predictor.SAM2VideoPredictor",
     ]
@@ -115,12 +135,16 @@ def build_sam2_video_predictor(
 def build_sam2_video_predictor_npz(
     config_file,
     ckpt_path=None,
-    device="cuda",
+    device=None,
     mode="eval",
     hydra_overrides_extra=[],
     apply_postprocessing=True,
     **kwargs,
 ):
+    # Use the provided device or get the best available one
+    device = device or get_best_available_device()
+    logging.info(f"Using device: {device}")
+
     hydra_overrides = [
         "++model._target_=sam2.sam2_video_predictor_npz.SAM2VideoPredictorNPZ",
     ]
