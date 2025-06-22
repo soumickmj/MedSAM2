@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/user-attachments/assets/18937bf5-619d-4ae6-a64c-d9900369a7e0" alt="MedSAM2 - Logo" width="35%">
+<img src="https://github.com/user-attachments/assets/18937bf5-619d-4ae6-a64c-d9900369a7e0" alt="MedSAM2 - Logo" width="30%">
 
 **Segment Anything in 3D Medical Images and Videos**
 
