@@ -1,5 +1,10 @@
-# MedSAM2
-Segment Anything in 3D Medical Images and Videos
+<div align="center">
+
+<img src="https://github.com/user-attachments/assets/18937bf5-619d-4ae6-a64c-d9900369a7e0" alt="MedSAM2 - Logo" width="35%">
+
+**Segment Anything in 3D Medical Images and Videos**
+
+</div>
 
 <div align="center">
  <table align="center">
@@ -22,9 +27,10 @@ Segment Anything in 3D Medical Images and Videos
      <td><a href="https://github.com/bowang-lab/MedSAM2?tab=readme-ov-file#bibtex" target="_blank"><img src="https://img.shields.io/badge/Paper-BibTeX-9370DB?style=for-the-badge&logoColor=white" alt="BibTeX"></a></td>
    </tr>
  </table>
-</div>
+</div><br>
 
-Welcome to join our [mailing list](https://forms.gle/bLxGb5SEpdLCUChQ7) to get updates. We’re also actively looking to collaborate on annotating new large-scale 3D datasets. If you have unlabeled medical images or videos and want to share them with the community, let’s connect!
+Join our [mailing list](https://forms.gle/bLxGb5SEpdLCUChQ7) to get updates. We’re also actively looking to collaborate on annotating new large-scale 3D datasets. If you have unlabeled medical images or videos and want to share them with the community, let’s connect!
+<br><br>
 
 
 ## Installation 
@@ -43,6 +49,7 @@ pip install numpy==1.26.3
 pip install ffmpeg-python 
 pip install moviepy
 ```
+<br>
 
 ## Download annotated datasets
 
@@ -55,6 +62,7 @@ pip install moviepy
 Note: Please also cite the raw [DeepLesion](https://doi.org/10.1117/1.JMI.5.3.036501) and [LLD-MMRI](https://www.sciencedirect.com/science/article/pii/S0893608025001078) dataset paper when using these datasets. 
 
 - [RVENET](https://rvenet.github.io/dataset/): Waiting for authors' approval to release the mask.  
+<br>
 
 
 ## Inference
@@ -80,14 +88,12 @@ python medsam2_infer_3D_CT.py -i CT_DeepLesion/images -o CT_DeepLesion/segmentat
 python medsam2_infer_video.py -i input_video_path -m input_mask_path -o output_video_path 
 ```
 
-
-
-
 ### Gradio demo
 
 ```bash
 python app.py
 ```
+<br>
 
 ## Training
 
@@ -96,12 +102,13 @@ Specify dataset path in `sam2/configs/sam2.1_hiera_tiny_finetune512.yaml`
 ```bash
 sbatch multi_node_train.sh
 ```
+<br>
 
 ## Acknowledgements
 
 - We highly appreciate all the challenge organizers and dataset owners for providing the public datasets to the community.
 - We thank Meta AI for making the source code of [SAM2](https://github.com/facebookresearch/sam2) publicly available. Please also cite this paper when using MedSAM2. 
-
+<br>
 
 ## Bibtex
 
