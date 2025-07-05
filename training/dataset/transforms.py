@@ -137,6 +137,31 @@ def pad(datapoint, index, padding, v2=False):
     return datapoint
 
 
+def vflip(datapoint, index):
+    datapoint.frames[index].data = F.vflip(datapoint.frames[index].data)
+    for obj in datapoint.frames[index].objects:
+        if obj.segment is not None:
+            obj.segment = F.vflip(obj.segment)
+    return datapoint
+
+
+class RandomVerticalFlip:
+    def __init__(self, consistent_transform, p=0.5):
+        self.p = p
+        self.consistent_transform = consistent_transform
+
+    def __call__(self, datapoint, **kwargs):
+        if self.consistent_transform:
+            if random.random() < self.p:
+                for i in range(len(datapoint.frames)):
+                    datapoint = vflip(datapoint, i)
+            return datapoint
+        for i in range(len(datapoint.frames)):
+            if random.random() < self.p:
+                datapoint = vflip(datapoint, i)
+        return datapoint
+
+
 class RandomHorizontalFlip:
     def __init__(self, consistent_transform, p=0.5):
         self.p = p
@@ -316,6 +341,7 @@ class RandomAffine:
         log_warning=True,
         num_tentatives=1,
         image_interpolation="bicubic",
+        p=1.0,
     ):
         """
         The mask is required for this transform.
@@ -331,6 +357,7 @@ class RandomAffine:
         self.consistent_transform = consistent_transform
         self.log_warning = log_warning
         self.num_tentatives = num_tentatives
+        self.p = p
 
         if image_interpolation == "bicubic":
             self.image_interpolation = InterpolationMode.BICUBIC
@@ -340,6 +367,9 @@ class RandomAffine:
             raise NotImplementedError
 
     def __call__(self, datapoint: VideoDatapoint, **kwargs):
+        if random.random() > self.p:
+            return datapoint
+
         for _tentative in range(self.num_tentatives):
             res = self.transform_datapoint(datapoint)
             if res is not None:
@@ -396,7 +426,7 @@ class RandomAffine:
                     if img_idx == 0 and transformed_mask.max() == 0:
                         # We are dealing with a video and the object is not visible in the first frame
                         # Return the datapoint without transformation
-                        return None
+                        return datapoint
                     transformed_masks.append(transformed_mask.squeeze())
 
             for i in range(len(img.objects)):
@@ -525,4 +555,80 @@ class RandomMosaicVideoAPI:
                 should_hflip=should_hflip,
             )
 
+        return datapoint
+
+
+class RandomGaussianNoise:
+    def __init__(self, consistent_transform, mean=0., std=0.1, p=0.5):
+        """
+        Args:
+            consistent_transform (bool): Whether to use the same noise parameters for all frames in the video
+            mean (float): Mean of the Gaussian noise
+            std (float): Standard deviation of the Gaussian noise 
+            p (float): Probability of applying noise
+        """
+        self.consistent_transform = consistent_transform
+        self.mean = mean
+        self.std = std
+        self.p = p
+
+    def __call__(self, datapoint: VideoDatapoint, **kwargs):
+        if self.consistent_transform:
+            if random.random() < self.p:
+                noise_std = random.uniform(0, self.std)
+                for img in datapoint.frames:
+                    # Convert PIL to tensor
+                    img_tensor = F.to_tensor(img.data)
+                    # Add noise
+                    noise = torch.randn_like(img_tensor) * noise_std + self.mean
+                    noisy_img = torch.clamp(img_tensor + noise, 0, 1)
+                    # Convert back to PIL
+                    img.data = F.to_pil_image(noisy_img)
+            return datapoint
+        for img in datapoint.frames:
+            if random.random() < self.p:
+                noise_std = random.uniform(0, self.std)
+                # Convert PIL to tensor
+                img_tensor = F.to_tensor(img.data)
+                # Add noise
+                noise = torch.randn_like(img_tensor) * noise_std + self.mean
+                noisy_img = torch.clamp(img_tensor + noise, 0, 1)
+                # Convert back to PIL
+                img.data = F.to_pil_image(noisy_img)
+        return datapoint
+
+
+class RandomGaussianBlur:
+    def __init__(self, consistent_transform, kernel_size, sigma=(0.1, 2.0), p=0.5):
+        """
+        Args:
+            consistent_transform (bool): Whether to use the same blur parameters for all frames
+            kernel_size (int): Gaussian kernel size. Must be odd and positive
+            sigma (tuple of float): Range of standard deviation for Gaussian kernel
+            p (float): Probability of applying blur
+        """
+        if isinstance(kernel_size, int):
+            kernel_size = (kernel_size, kernel_size)
+        if isinstance(sigma, (float, int)):
+            sigma = (sigma, sigma)
+            
+        self.consistent_transform = consistent_transform
+        self.kernel_size = kernel_size
+        self.sigma = sigma
+        self.p = p
+
+    def __call__(self, datapoint: VideoDatapoint, **kwargs):
+        if self.consistent_transform:
+            if random.random() < self.p:
+                # Sample sigma once for all frames
+                sigma = random.uniform(self.sigma[0], self.sigma[1])
+                for img in datapoint.frames:
+                    img.data = F.gaussian_blur(img.data, self.kernel_size, [sigma, sigma])
+            return datapoint
+            
+        for img in datapoint.frames:
+            if random.random() < self.p:
+                # Sample sigma independently for each frame
+                sigma = random.uniform(self.sigma[0], self.sigma[1])
+                img.data = F.gaussian_blur(img.data, self.kernel_size, [sigma, sigma])
         return datapoint
